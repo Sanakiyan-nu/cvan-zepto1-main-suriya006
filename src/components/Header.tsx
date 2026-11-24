@@ -12,7 +12,7 @@ export default function Header() {
         <QrCode className="w-7 h-7 text-primary" />
       </div>
       <h1 className="text-2xl font-bold font-heading tracking-tight">
-        <span className="gradient-text">CVAN</span>{' '}
+        <span className="gradient-text">MLLN</span>{' '}
         <span className="text-foreground">Generator</span>
       </h1>
     </motion.header>
