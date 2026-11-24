@@ -3,7 +3,7 @@ export const SECOND_LETTERS = 'ABCDEFGH'.split('');
 export const NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export function formatCode(parts: string[]): string {
-  return `CVAN-${parts.join('-')}`;
+  return `MLKN-${parts.join('-')}`;
 }
 
 export function parseInput(input: string): string | null {
@@ -19,7 +19,7 @@ export function parseInput(input: string): string | null {
   if (match2) {
     const [, l1, n1] = match2;
     const num1 = parseInt(n1, 10);
-    if (num1 >= 1) return `CVAN-${l1}-${num1}`;
+    if (num1 >= 1) return `MLKN-${l1}-${num1}`;
   }
 
   // Long code: A1A1, A28A3, F26A5 → CVAN-A-1-A-1, CVAN-A-28-A-3, CVAN-F-26-A-5
@@ -29,7 +29,7 @@ export function parseInput(input: string): string | null {
     const num1 = parseInt(n1, 10);
     const num2 = parseInt(n2, 10);
     if (num1 >= 1 && num2 >= 1) {
-      return `CVAN-${l1}-${num1}-${l2}-${num2}`;
+      return `MLKN-${l1}-${num1}-${l2}-${num2}`;
     }
   }
 
@@ -72,7 +72,7 @@ export function parseVoiceInput(transcript: string): string | null {
     const [l1, n1] = parts;
     const num1 = parseInt(n1, 10);
     if (/^[A-L]$/.test(l1) && /^\d+$/.test(n1) && num1 >= 1) {
-      return `CVAN-${l1}-${num1}`;
+      return `MLKN-${l1}-${num1}`;
     }
   }
 
@@ -81,7 +81,7 @@ export function parseVoiceInput(transcript: string): string | null {
     const num1 = parseInt(n1, 10);
     const num2 = parseInt(n2, 10);
     if (/^[A-L]$/.test(l1) && /^[A-H]$/.test(l2) && /^\d+$/.test(n1) && /^\d+$/.test(n2) && num1 >= 1 && num2 >= 1) {
-      return `CVAN-${l1}-${num1}-${l2}-${num2}`;
+      return `MLKN-${l1}-${num1}-${l2}-${num2}`;
     }
   }
 
