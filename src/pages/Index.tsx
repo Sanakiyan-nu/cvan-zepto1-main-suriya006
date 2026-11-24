@@ -88,7 +88,7 @@ export default function Index() {
 
         <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-center mb-10">
           <h1 className="text-4xl md:text-5xl font-bold font-heading mb-3 gradient-text leading-tight">
-            CVAN Code Generator
+            MLKN Code Generator
           </h1>
           <p className="text-muted-foreground max-w-md mx-auto">
             Generate unique structured codes with QR codes. Fast, simple, reliable.
