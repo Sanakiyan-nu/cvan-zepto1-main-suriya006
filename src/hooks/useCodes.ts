@@ -1,0 +1,46 @@
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
+
+export function useCodes() {
+  const queryClient = useQueryClient();
+
+  const codesQuery = useQuery({
+    queryKey: ['codes'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('codes')
+        .select('*');
+      if (error) throw error;
+      const rows = data as { id: string; code: string; created_at: string }[];
+      // Sort: shorter codes first, then alphabetically
+      rows.sort((a, b) => {
+        const lenDiff = a.code.length - b.code.length;
+        if (lenDiff !== 0) return lenDiff;
+        return a.code.localeCompare(b.code);
+      });
+      return rows;
+    },
+  });
+
+  const addCode = useMutation({
+    mutationFn: async (code: string) => {
+      const { data, error } = await supabase
+        .from('codes')
+        .insert({ code })
+        .select()
+        .single();
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['codes'] });
+      toast.success('Code generated successfully!');
+    },
+    onError: (err: Error) => {
+      toast.error(err.message);
+    },
+  });
+
+  return { codes: codesQuery.data ?? [], isLoading: codesQuery.isLoading, addCode };
+}
